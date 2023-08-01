@@ -18,7 +18,8 @@ const Form = ({ email }) => {
 
   const fetchUserTasks = async () => {
     try {
-      const response = await axios.post('https://qjjwsubz2m.execute-api.us-east-1.amazonaws.com/prod/gettask', { email });
+      const URL = process.env.REACT_APP_API_LINK + "/gettask";
+      const response = await axios.post(URL, { email });
       console.log('API Response:', response.data);
       const responseData = JSON.parse(response.data.body);
 
@@ -41,8 +42,9 @@ const Form = ({ email }) => {
   const handleSubmit = async () => {
     try {
       // Save the new task and deadline for the user in DynamoDB via API Gateway
+      const URL = process.env.REACT_APP_API_LINK + "/saveTask";
       console.log("you were here")
-      const response = await axios.post("https://qjjwsubz2m.execute-api.us-east-1.amazonaws.com/prod/savetask", { email, task, deadline });
+      const response = await axios.post(URL, { email, task, deadline });
       console.log(response);
       // Refresh the list of tasks after submission
       fetchUserTasks();

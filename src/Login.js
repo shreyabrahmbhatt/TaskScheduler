@@ -19,10 +19,11 @@ const Login = ({ onLogin }) => {
       console.log("all okay till here")
       //console.log(process.env.API_SAVEUSER);
 
-    //   const API_SAVEUSER_URL = process.env.API_SAVEUSER;
+       const URL = process.env.REACT_APP_API_LINK + "/saveUser";
+       console.log(process.env.REACT_APP_API_LINK)
       // Save user details to DynamoDB using API Gateway endpoint
-      await axios.post("https://qjjwsubz2m.execute-api.us-east-1.amazonaws.com/prod/" , user);
-      //console.log(API_SAVEUSER_URL)
+      await axios.post(URL , user);
+      console.log(process.env.REACT_APP_API_LINK)
       onLogin(email);
     } catch (error) {
       console.error('Error saving user details:', error);
